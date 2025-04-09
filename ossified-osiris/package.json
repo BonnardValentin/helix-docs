@@ -1,0 +1,16 @@
+{
+  "name": "helix-docs",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "node ./scripts/copy-docs.js && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "copy-docs": "node ./scripts/copy-docs.js"
+  },
+  "dependencies": {
+    "astro": "^4.0.3"
+  }
+}

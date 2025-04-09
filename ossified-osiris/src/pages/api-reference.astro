@@ -1,0 +1,375 @@
+---
+const agentIdParam = "id";
+const apiKeyIdParam = "apiKeyId";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Helix Agent API Reference</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        line-height: 1.6;
+      }
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+      h2 {
+        font-size: 2rem;
+        margin-top: 2rem;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.5rem;
+      }
+      h3 {
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+      }
+      h4 {
+        font-size: 1.2rem;
+        margin-top: 1.2rem;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+      .header a {
+        text-decoration: none;
+        color: #4a6cf7;
+      }
+      .method {
+        display: inline-block;
+        padding: 0.3rem 0.6rem;
+        border-radius: 4px;
+        font-weight: bold;
+        margin-right: 0.5rem;
+        font-size: 0.9rem;
+      }
+      .get {
+        background-color: #61affe;
+        color: white;
+      }
+      .post {
+        background-color: #49cc90;
+        color: white;
+      }
+      .delete {
+        background-color: #f93e3e;
+        color: white;
+      }
+      .endpoint {
+        margin-bottom: 2rem;
+        padding: 1rem;
+        border: 1px solid #eee;
+        border-radius: 8px;
+      }
+      .endpoint-path {
+        font-family: monospace;
+        font-size: 1.1rem;
+        margin-left: 0.5rem;
+      }
+      .description {
+        margin: 1rem 0;
+      }
+      pre {
+        background-color: #f6f8fa;
+        border-radius: 6px;
+        padding: 16px;
+        overflow: auto;
+      }
+      code {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0;
+      }
+      th, td {
+        padding: 0.75rem;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background-color: #f9f9f9;
+      }
+      .button {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background-color: #4a6cf7;
+        color: white;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: bold;
+        margin: 1rem 0;
+      }
+      .button:hover {
+        background-color: #3a5cd7;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Helix Agent API Reference</h1>
+      <a href="/">Back to home</a>
+    </div>
+
+    <p>
+      This page presents the main resources and endpoints of the Helix Agent API.
+      For complete interactive documentation, see the <a href="/swagger">Swagger documentation</a>.
+    </p>
+
+    <div class="button-container">
+      <a href="/swagger" class="button">Interactive Swagger Documentation</a>
+    </div>
+
+    <h2>Agent Endpoints</h2>
+    
+    <div class="endpoint">
+      <h3><span class="method post">POST</span><span class="endpoint-path">/api/agents</span></h3>
+      <div class="description">
+        <p>Creates a new agent with specified capabilities and metadata.</p>
+      </div>
+      <h4>Request Parameters</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>name</td>
+            <td>string</td>
+            <td>Yes</td>
+            <td>Name of the agent</td>
+          </tr>
+          <tr>
+            <td>capabilities</td>
+            <td>array</td>
+            <td>Yes</td>
+            <td>List of agent capabilities</td>
+          </tr>
+          <tr>
+            <td>type</td>
+            <td>string</td>
+            <td>Yes</td>
+            <td>Agent type</td>
+          </tr>
+          <tr>
+            <td>description</td>
+            <td>string</td>
+            <td>No</td>
+            <td>Agent description</td>
+          </tr>
+          <tr>
+            <td>config</td>
+            <td>object</td>
+            <td>No</td>
+            <td>Agent configuration</td>
+          </tr>
+          <tr>
+            <td>dna</td>
+            <td>object</td>
+            <td>No</td>
+            <td>DNA/configuration for the agent</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Request Example</h4>
+      <pre><code>{"{"}"name": "Assistant AI",
+  "type": "customer-support",
+  "capabilities": ["text-generation", "knowledge-retrieval"],
+  "description": "Customer support agent",
+  "config": {"{"}
+    "maxTokens": 1024,
+    "temperature": 0.7
+  {"}"}
+{"}"}</code></pre>
+    </div>
+
+    <div class="endpoint">
+      <h3><span class="method get">GET</span><span class="endpoint-path">/api/agents/{agentIdParam}</span></h3>
+      <div class="description">
+        <p>Retrieves details for a specific agent by ID.</p>
+      </div>
+      <h4>Path Parameters</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>id</td>
+            <td>string</td>
+            <td>Yes</td>
+            <td>Agent identifier</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>API Key Endpoints</h2>
+    
+    <div class="endpoint">
+      <h3><span class="method post">POST</span><span class="endpoint-path">/api/keys</span></h3>
+      <div class="description">
+        <p>Creates a new API key with specified permissions.</p>
+      </div>
+      <h4>Request Parameters</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>scopes</td>
+            <td>array</td>
+            <td>Yes</td>
+            <td>List of permissions/scopes</td>
+          </tr>
+          <tr>
+            <td>expiresInDays</td>
+            <td>number</td>
+            <td>No</td>
+            <td>Number of days until expiration</td>
+          </tr>
+          <tr>
+            <td>description</td>
+            <td>string</td>
+            <td>No</td>
+            <td>API key description</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="endpoint">
+      <h3><span class="method get">GET</span><span class="endpoint-path">/api/keys</span></h3>
+      <div class="description">
+        <p>Lists all API keys.</p>
+      </div>
+    </div>
+
+    <div class="endpoint">
+      <h3><span class="method delete">DELETE</span><span class="endpoint-path">/api/keys/{apiKeyIdParam}</span></h3>
+      <div class="description">
+        <p>Revokes a specific API key.</p>
+      </div>
+      <h4>Path Parameters</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>apiKeyId</td>
+            <td>string</td>
+            <td>Yes</td>
+            <td>API key identifier</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Inference Endpoints</h2>
+    
+    <div class="endpoint">
+      <h3><span class="method post">POST</span><span class="endpoint-path">/api/inference-together/inference</span></h3>
+      <div class="description">
+        <p>Executes inference with the specified model.</p>
+      </div>
+      <h4>Request Parameters</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>agentId</td>
+            <td>string</td>
+            <td>Yes</td>
+            <td>Agent identifier</td>
+          </tr>
+          <tr>
+            <td>prompt</td>
+            <td>string</td>
+            <td>Yes</td>
+            <td>Prompt to process</td>
+          </tr>
+          <tr>
+            <td>context</td>
+            <td>object</td>
+            <td>No</td>
+            <td>Additional context</td>
+          </tr>
+          <tr>
+            <td>options</td>
+            <td>object</td>
+            <td>No</td>
+            <td>Inference options (temperature, maxTokens, etc.)</td>
+          </tr>
+        </tbody>
+      </table>
+      <h4>Request Example</h4>
+      <pre><code>{"{"}"agentId": "12345",
+  "prompt": "What are the best practices for hexagonal architecture?",
+  "options": {"{"}
+    "temperature": 0.7,
+    "maxTokens": 2048
+  {"}"}
+{"}"}</code></pre>
+    </div>
+
+    <h2>MCP Message Structure</h2>
+    
+    <p>Model Context Protocol messages use a standardized format:</p>
+    
+    <pre><code>{"{"}"id": "unique-message-uuid",
+  "type": "command | event | response",
+  "source": "source-system-identifier",
+  "destination": "destination-system-identifier",
+  "timestamp": "2023-04-09T16:02:30.000Z",
+  "payload": {"{"} /* content specific to message type */ {"}"},
+  "correlationId": "uuid-for-related-message-tracking"
+{"}"}</code></pre>
+
+    <p>For more details on the Model Context Protocol, see the <a href="/mcp">dedicated MCP documentation</a>.</p>
+
+    <div class="button-container">
+      <a href="/swagger" class="button">View Complete Swagger Documentation</a>
+    </div>
+  </body>
+</html> 

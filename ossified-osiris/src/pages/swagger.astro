@@ -1,0 +1,132 @@
+---
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Helix Agent API Documentation</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        line-height: 1.6;
+      }
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+      h2 {
+        font-size: 2rem;
+        margin-top: 2rem;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.5rem;
+      }
+      h3 {
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+      .header a {
+        text-decoration: none;
+        color: #4a6cf7;
+      }
+      .content {
+        margin-bottom: 2rem;
+      }
+      .iframe-container {
+        position: relative;
+        width: 100%;
+        height: 800px;
+      }
+      iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+      .button-container {
+        margin: 2rem 0;
+      }
+      .button {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background-color: #4a6cf7;
+        color: white;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: bold;
+        margin-right: 1rem;
+      }
+      .button:hover {
+        background-color: #3a5cd7;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Helix Agent API Documentation</h1>
+      <a href="/">Back to home</a>
+    </div>
+
+    <div class="content">
+      <p>
+        This page presents the complete documentation of the Helix Agent API, automatically generated from OpenAPI (Swagger) specifications.
+        The interactive documentation allows you to explore available endpoints, data models, and even test API requests directly from your browser.
+      </p>
+
+      <h2>Access to Documentation</h2>
+      <p>
+        You can access the complete Swagger documentation in several ways:
+      </p>
+      
+      <div class="button-container">
+        <a href="https://helix-agents-core.vercel.app/documentation" target="_blank" class="button">
+          Interactive Documentation
+        </a>
+        <a href="https://helix-agents-core.vercel.app/documentation/json" target="_blank" class="button">
+          OpenAPI Specification (JSON)
+        </a>
+      </div>
+
+      <h2>API Categories</h2>
+      <p>The Helix API is organized into several categories:</p>
+      <ul>
+        <li><strong>Agents</strong> - Management of agents and their capabilities</li>
+        <li><strong>API Keys</strong> - Creation and management of API keys</li>
+        <li><strong>Inference</strong> - Inference services for models</li>
+        <li><strong>MCP</strong> - Model Context Protocol endpoints</li>
+      </ul>
+      
+      <h2>Embedded Documentation</h2>
+      <p>
+        You can explore the interactive documentation below:
+      </p>
+    </div>
+
+    <div class="iframe-container">
+      <iframe 
+        src="https://helix-agents-core.vercel.app/documentation" 
+        title="Swagger UI"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <h2>Model Context Protocol (MCP) Documentation</h2>
+    <p>
+      To learn more about the Model Context Protocol and its implementation, see the <a href="/mcp">dedicated MCP documentation</a>.
+    </p>
+  </body>
+</html> 

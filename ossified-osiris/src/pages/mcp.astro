@@ -1,0 +1,198 @@
+---
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Model Context Protocol (MCP) Documentation</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        line-height: 1.6;
+      }
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+      h2 {
+        font-size: 2rem;
+        margin-top: 2rem;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.5rem;
+      }
+      h3 {
+        font-size: 1.5rem;
+        margin-top: 1.5rem;
+      }
+      pre {
+        background-color: #f6f8fa;
+        border-radius: 6px;
+        padding: 16px;
+        overflow: auto;
+      }
+      code {
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo', monospace;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+      .header a {
+        text-decoration: none;
+        color: #4a6cf7;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0;
+      }
+      th, td {
+        padding: 0.75rem;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background-color: #f9f9f9;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Model Context Protocol</h1>
+      <a href="/">Retour à l'accueil</a>
+    </div>
+
+    <p>
+      Le Model Context Protocol (MCP) est un protocole standardisé pour la communication entre agents et systèmes dans l'écosystème Helix. 
+      Il définit la structure, le format et les règles d'échange de contextes et données pour les modèles d'IA.
+    </p>
+
+    <h2>Documentation complète</h2>
+
+    <p>
+      La documentation complète du MCP est disponible dans l'API Swagger à l'adresse suivante :
+      <a href="https://api.helix.example.com/documentation" target="_blank">https://api.helix.example.com/documentation</a>
+    </p>
+
+    <h2>Structure de base</h2>
+
+    <p>
+      Le MCP utilise un format basé sur JSON pour faciliter la gestion du contexte et les interactions avec les modèles d'IA.
+      Tous les messages MCP partagent une structure commune :
+    </p>
+
+    <pre><code>{"{"}"id": "uuid-unique-du-message",
+  "type": "command | event | response",
+  "source": "identifiant-du-système-source",
+  "destination": "identifiant-du-système-destination",
+  "timestamp": "2023-04-09T16:02:30.000Z",
+  "payload": {"{"} /* contenu spécifique au type de message */ {"}"},
+  "correlationId": "uuid-pour-le-suivi-des-messages-liés"
+{"}"}</code></pre>
+
+    <h2>Types de messages</h2>
+
+    <h3>1. Messages de commande</h3>
+    <p>
+      Les messages de commande sont utilisés pour demander l'exécution d'une action spécifique sur un modèle.
+      Par exemple, pour demander une inférence :
+    </p>
+
+    <pre><code>{"{"}"id": "123e4567-e89b-12d3-a456-426614174000",
+  "type": "command",
+  "source": "client-app",
+  "destination": "helix-agent",
+  "timestamp": "2023-04-09T16:02:30.000Z",
+  "payload": {"{"}
+    "command": "executeInference",
+    "parameters": {"{"}
+      "model": "gpt-4",
+      "prompt": "Bonjour, comment ça va ?",
+      "options": {"{"}
+        "temperature": 0.7,
+        "maxTokens": 100
+      {"}"}
+    {"}"}
+  {"}"},
+  "correlationId": "550e8400-e29b-41d4-a716-446655440000"
+{"}"}</code></pre>
+
+    <h3>2. Messages d'événement</h3>
+    <p>
+      Les messages d'événement notifient les systèmes des changements dans le contexte ou l'état du modèle.
+      Par exemple, pour notifier d'une mise à jour du contexte :
+    </p>
+
+    <pre><code>{"{"}"id": "123e4567-e89b-12d3-a456-426614174001",
+  "type": "event",
+  "source": "helix-agent",
+  "destination": "client-app",
+  "timestamp": "2023-04-09T16:02:35.000Z",
+  "payload": {"{"}
+    "event": "contextUpdated",
+    "data": {"{"}
+      "requestId": "req-123",
+      "model": "gpt-4",
+      "contextSize": 2048,
+      "contextUsage": 1024
+    {"}"}
+  {"}"},
+  "correlationId": "550e8400-e29b-41d4-a716-446655440000"
+{"}"}</code></pre>
+
+    <h3>3. Messages de réponse</h3>
+    <p>
+      Les messages de réponse sont envoyés après le traitement par le modèle.
+      Par exemple, pour renvoyer le résultat d'une inférence :
+    </p>
+
+    <pre><code>{"{"}"id": "123e4567-e89b-12d3-a456-426614174002",
+  "type": "response",
+  "source": "helix-agent",
+  "destination": "client-app",
+  "timestamp": "2023-04-09T16:02:40.000Z",
+  "payload": {"{"}
+    "success": true,
+    "data": {"{"}
+      "result": "Je vais bien, merci ! Comment puis-je vous aider aujourd'hui ?",
+      "model": "gpt-4",
+      "usage": {"{"}
+        "promptTokens": 10,
+        "completionTokens": 15,
+        "totalTokens": 25
+      {"}"}
+    {"}"}
+  {"}"},
+  "correlationId": "550e8400-e29b-41d4-a716-446655440000"
+{"}"}</code></pre>
+
+    <h2>Gestion du contexte</h2>
+    <p>
+      Le MCP est spécialement conçu pour gérer efficacement le contexte des modèles d'IA :
+    </p>
+    <ul>
+      <li><strong>Compression de contexte :</strong> Optimisation de l'utilisation du contexte pour les modèles à contexte limité</li>
+      <li><strong>Fenêtrage de contexte :</strong> Techniques pour conserver les parties les plus pertinentes du contexte</li>
+      <li><strong>Persistance de contexte :</strong> Mécanismes pour sauvegarder et restaurer le contexte entre les sessions</li>
+      <li><strong>Enrichissement de contexte :</strong> Ajout d'informations externes au contexte de base</li>
+    </ul>
+
+    <h2>Implémentation</h2>
+    <p>
+      Pour implémenter le MCP dans votre application, consultez les ressources suivantes :
+    </p>
+    <ul>
+      <li><a href="/api-docs" target="_blank">Documentation API complète</a></li>
+      <li><a href="/mcp-docs" target="_blank">Spécification MCP détaillée</a></li>
+      <li><a href="/guides" target="_blank">Guides d'implémentation</a></li>
+    </ul>
+  </body>
+</html> 
